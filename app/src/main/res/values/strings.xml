@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RealmIo</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_detail">Main Detail</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+</resources>
