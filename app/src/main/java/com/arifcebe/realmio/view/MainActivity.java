@@ -1,5 +1,7 @@
 package com.arifcebe.realmio.view;
 
+import android.animation.IntArrayEvaluator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,14 +16,17 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.arifcebe.realmio.Cat;
+import com.arifcebe.realmio.MapsActivity;
 import com.arifcebe.realmio.R;
 import com.arifcebe.realmio.adapter.MainAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -70,6 +75,11 @@ public class MainActivity extends AppCompatActivity
         getListCat();
     }
 
+    @OnClick(R.id.maps)
+    public void onClickMaps(){
+        startActivity(new Intent(this, MapsActivity.class));
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -92,11 +102,18 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * simpan nama dan umur ke dalam realm
+     * @param name
+     * @param age
+     */
     private void saveCat(String name,int age){
+        Realm realm = Realm.getInstance(this);
+        //Log.d("realm","last no "+realm.where(Cat.class).max("no").toString());
+        cat.setNo(14);
         cat.setName(name);
         cat.setAge(age);
 
-        Realm realm = Realm.getInstance(this);
         realm.beginTransaction();
         realm.copyToRealm(cat);
         realm.commitTransaction();
@@ -104,28 +121,11 @@ public class MainActivity extends AppCompatActivity
         getListCat();
     }
 
+    /**
+     * tampilkan seluruh data
+     */
     private void getListCat(){
-/*        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                // Get a Realm instance for this thread
-                Realm realm = Realm.getInstance(context);
-                Dog dog = realm.where(Dog.class).equalTo("name", "Rex").findFirst();
-                Log.v(TAG, "Age of the dog: " + dog.getAge());
-                realm.close();
-            }
-        });
-        thread.start();*/
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Realm realm = Realm.getInstance(MainActivity.this);
-                Cat cat = realm.where(Cat.class).findFirst();
-                Log.v("realm","get realm "+cat.getName()+" "+cat.getAge());
-                realm.close();
-            }
-        });
-        thread.start();
+
         Realm realm = Realm.getInstance(this);
         RealmQuery<Cat> query = realm.where(Cat.class);
 

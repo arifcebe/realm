@@ -10,6 +10,7 @@ public class Cat extends RealmObject {
     @Required
     private String name;
     private int age;
+    private int no;
 
     public String getName() {
         return name;
@@ -25,5 +26,13 @@ public class Cat extends RealmObject {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getNo() {
+        return no;
+    }
+
+    public void setNo(int no) {
+        this.no = no;
     }
 }

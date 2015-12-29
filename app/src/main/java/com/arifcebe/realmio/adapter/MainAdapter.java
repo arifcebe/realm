@@ -58,9 +58,17 @@ public class MainAdapter extends BaseAdapter {
         }
 
         Cat cat = catList.get(position);
-        holder.name.setText(cat.getName());
+        holder.name.setText(cat.getNo()+"\n"+cat.getName());
         holder.age.setText(String.valueOf(cat.getAge()));
 
+        holder.name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ViewGroup.LayoutParams params = holder.name.getLayoutParams();
+                params.height = 370;
+                holder.name.setLayoutParams(params);
+            }
+        });
 
         return convertView;
     }

@@ -29,6 +29,5 @@ public class MainDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_detail_activity);
         ButterKnife.bind(this);
-
     }
 }

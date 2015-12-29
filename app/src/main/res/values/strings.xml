@@ -4,4 +4,5 @@
     <string name="main_detail">Main Detail</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="title_activity_maps">Map</string>
 </resources>
